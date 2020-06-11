@@ -30,7 +30,6 @@ public class Solution_2025 {
                             min.add(mass.get(index[0] - 1));
                         } else {
                             List<Integer> subList = mass.subList(index[0]-1, index[1]);
-                         //   subList.add(mass.get(index[1]));
                             min.add(minInt(subList));
                         }
                     }

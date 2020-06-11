@@ -10,7 +10,7 @@ public class Person {
 
     public boolean marry(Person person) {
         if (person.man != this.man) {
-            if (this.spouse != null && person.spouse != null) {
+            if (this.spouse != null || person.spouse != null) {
                 this.divorce();
                 person.divorce();
                 this.spouse.divorce();
@@ -21,6 +21,7 @@ public class Person {
             }
         }
         if (this.spouse == null) return true;
+
         return false;
     }
 
