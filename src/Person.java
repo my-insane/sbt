@@ -7,23 +7,6 @@ public class Person {
         this.man = man;
         this.name = name;
     }
-
-    public static void main(String[] args) {
-        Person p1 = new Person(true, "p1");
-        Person p2 = new Person(false, "p2");
-        Person p3 = new Person(true, "p3");
-        Person p4 = new Person(false, "p4");
-
-        p1.spouse = p2;
-        p2.spouse = p1;
-        p3.spouse = p4;
-        p4.spouse = p3;
-        p1.marry(p4);
-        p1.marry(p3);
-        p1.marry(p2);
-
-    }
-
     @Override
     public String toString() {
         return "Person{" +
@@ -44,21 +27,19 @@ public class Person {
 
     public boolean marry(Person person) {
         if (this.man == person.man) {
-            System.out.println("man = man? no marry");
             return false;
         }
         if (this.spouse != null && this.spouse != person.spouse.spouse) {
             this.spouse.divorce();
-            System.out.println("divorce & marry");
-            return true;
+            this.spouse = person;
+            person.spouse = this;
+               return true;
         }
-        if (this.spouse == person.spouse.spouse) {
-            System.out.println("spouses");
+        if (this.spouse == person) {
             return false;
         }
         this.spouse = person;
         person.spouse = this;
-        System.out.println("marry");
         return true;
     }
 
