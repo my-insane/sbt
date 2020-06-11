@@ -19,7 +19,18 @@ public class Person {
         p3.spouse = p4;
         p4.spouse = p3;
         p1.marry(p4);
+        p1.marry(p3);
+        p1.marry(p2);
 
+    }
+
+    @Override
+    public String toString() {
+        return "Person{" +
+                "man=" + man +
+                ", name='" + name + '\'' +
+                ", spouse=" + spouse +
+                '}';
     }
 
     /**
@@ -32,22 +43,23 @@ public class Person {
      */
 
     public boolean marry(Person person) {
-        //     System.out.println("1");
-        if (this.man != person.man) {
-            if (this.spouse != null) {
-                this.spouse.divorce();
-                System.out.println("divorce & marry");
-            } else if (this.spouse == person.spouse) {
-                return false;
-            } else {
-                this.spouse = person;
-                person.spouse = this;
-                System.out.println("marry");
-            }
+        if (this.man == person.man) {
+            System.out.println("man = man? no marry");
+            return false;
         }
-        if (this.man != person.man && this.spouse != person.spouse)
+        if (this.spouse != null && this.spouse != person.spouse.spouse) {
+            this.spouse.divorce();
+            System.out.println("divorce & marry");
             return true;
-        else return false;
+        }
+        if (this.spouse == person.spouse.spouse) {
+            System.out.println("spouses");
+            return false;
+        }
+        this.spouse = person;
+        person.spouse = this;
+        System.out.println("marry");
+        return true;
     }
 
     public boolean divorce() {
